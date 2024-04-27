@@ -1,1 +1,1 @@
-# stripe-events
+# stripe-events-processor
