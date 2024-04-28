@@ -1,10 +1,14 @@
 <h1>Subscription Overview</h1>
-<ol>
-	<% @subscriptions.each do |subscription| %>
-		<li>
-			<p>Stripe_id: <%= subscription.stripe_id %></p>
-			<p>Status: <%= subscription.status %></p>
-			<p>Created_at: <%= subscription.created_at %></p>
-		</li>
-	<% end %>
-</ol>
+<% if @subscriptions.any? %>
+	<ol>
+		<% @subscriptions.each do |subscription| %>
+			<li>
+				<p>Stripe_id: <%= subscription.stripe_id %></p>
+				<p>Status: <%= subscription.status %></p>
+				<p>Created_at: <%= subscription.created_at %></p>
+			</li>
+		<% end %>
+	</ol>
+<% else %>
+	<p>No subscriptions found. Please use the Stripe UI to create the first one!</p>
+<% end %>

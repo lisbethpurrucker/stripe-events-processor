@@ -14,7 +14,8 @@ RSpec.describe StripeSubscriptionService do
   describe '#pay' do
     it 'updates subscription status to paid' do
       subscription = Subscription.create(stripe_id: 'sub_123')
-      event = double('Stripe event', data: double('Stripe data', object: double('Stripe object', subscription: subscription.stripe_id)))
+      event_data = double('Stripe data', object: double('Stripe object', subscription: subscription.stripe_id))
+      event = double('Stripe event', data: event_data)
 
       service.pay(event)
 
@@ -23,13 +24,26 @@ RSpec.describe StripeSubscriptionService do
   end
 
   describe '#cancel' do
-    it 'updates subscription status to canceled' do
-      subscription = Subscription.create(stripe_id: 'sub_123')
-      event = double('Stripe event', data: double('Stripe data', object: double('Stripe object', id: subscription.stripe_id)))
+    context 'when subscription is paid' do
+      it 'updates subscription status to canceled' do
+        subscription = Subscription.create(stripe_id: 'sub_123', status: 'paid')
+        event = double('Stripe event', data: double('Stripe data', object: double('Stripe object', id: subscription.stripe_id)))
 
-      service.cancel(event)
+        service.cancel(event)
 
-      expect(subscription.reload.status).to eq('canceled')
+        expect(subscription.reload.status).to eq('canceled')
+      end
+    end
+
+    context 'when subscription is not paid' do
+      it 'does not update subscription status' do
+        subscription = Subscription.create(stripe_id: 'sub_123', status: 'unpaid')
+        event = double('Stripe event', data: double('Stripe data', object: double('Stripe object', id: subscription.stripe_id)))
+
+        service.cancel(event)
+
+        expect(subscription.reload.status).to eq('unpaid')
+      end
     end
   end
 end

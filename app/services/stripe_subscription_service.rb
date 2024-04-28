@@ -2,23 +2,28 @@
 class StripeSubscriptionService
   def create(event)
     subscription_id = event.data.object.id
-    Subscription.create(stripe_id: subscription_id)
+    find_or_create_subscription(subscription_id)
   end
 
   def pay(event)
     subscription_id = event.data.object.subscription
-    update_subscription_status(subscription_id, 'paid')
+    subscription = find_or_create_subscription(subscription_id)
+    update_subscription_status(subscription, 'paid')
   end
 
   def cancel(event)
     subscription_id = event.data.object.id
-    update_subscription_status(subscription_id, 'canceled')
+    subscription = find_or_create_subscription(subscription_id)
+    update_subscription_status(subscription, 'canceled') if subscription.paid?
   end
 
   private
 
-  def update_subscription_status(subscription_id, status)
-    subscription = Subscription.find_or_initialize_by(stripe_id: subscription_id)
+  def find_or_create_subscription(subscription_id)
+    Subscription.find_or_create_by(stripe_id: subscription_id)
+  end
+
+  def update_subscription_status(subscription, status)
     subscription.update(status:)
   end
 end
