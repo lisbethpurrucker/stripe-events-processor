@@ -18,7 +18,7 @@ class StripeSubscriptionService
   private
 
   def update_subscription_status(subscription_id, status)
-    subscription = Subscription.find_by(stripe_id: subscription_id)
-    subscription.update(status:) if subscription.present?
+    subscription = Subscription.find_or_initialize_by(stripe_id: subscription_id)
+    subscription.update(status:)
   end
 end
