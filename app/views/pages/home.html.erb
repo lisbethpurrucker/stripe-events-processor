@@ -1,0 +1,6 @@
+<h1>Subscription Overview</h1>
+<ol>
+	<% @subscriptions.each do |subscription| %>
+		<li>stripe_id: <%= subscription.stripe_id %>, status: <%= subscription.status %>, created_at <%= subscription.created_at %></li>
+	<% end %>
+</ol>

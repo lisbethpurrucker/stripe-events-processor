@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root 'subscriptions#index'
+  root 'pages#home'
+
+  mount StripeEvent::Engine, at: '/stripe-webhooks'
 end
