@@ -1,6 +1,23 @@
 # README
 
-This README provides instructions for getting the application up and running.
+## Stripe Events Processor
+
+This application is a simple Stripe events processor that listens for webhook events from Stripe and handles subscription-related events.
+
+## Usage
+
+- **Stripe Webhook Setup**: Configure your Stripe account to send webhook events to the endpoint provided by this application.
+- **Installation**: Clone this repository and install dependencies by running `bundle install`.
+- **Configuration**: Set up your Stripe API keys in the `.env` file.
+- **Run the Application**: Start the Rails server using `rails server`.
+
+## Future Enhancements
+- **Authentication**: Add authentication logic to secure the application and associate subscriptions with users.
+- **Plan Model**: Introduce a Plan model to manage different subscription plans and features.
+- **Enhanced Subscription Model**: Expand the Subscription model to include additional attributes like plan_id, user_id, cancellation_date, etc.
+- **Improved Error Handling**: Handle errors more robustly, including logging, notifying administrators, and providing user-friendly error messages.
+- **Tests for Error Handling**: Add tests to ensure proper error handling and logging functionality.
+- **Making use of Hotwire Technology**: Set up Turbo for better performance.
 
 ## Ruby version
 This application requires Ruby version 3.1.3. If you don't have Ruby installed, you can download it from [the official Ruby website](https://www.ruby-lang.org/en/downloads/).
