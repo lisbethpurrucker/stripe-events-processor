@@ -3,9 +3,9 @@
 	<ol>
 		<% @subscriptions.each do |subscription| %>
 			<li>
-				<p>Stripe_id: <%= subscription.stripe_id %></p>
+				<p>Subscription: <%= subscription.stripe_id %></p>
 				<p>Status: <%= subscription.status %></p>
-				<p>Created_at: <%= subscription.created_at %></p>
+				<p>Created at: <%= subscription.created_at %></p>
 			</li>
 		<% end %>
 	</ol>
