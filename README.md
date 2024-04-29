@@ -6,10 +6,11 @@ This application is a simple Stripe events processor that listens for webhook ev
 
 ## Usage
 
-- **Stripe Webhook Setup**: Configure your Stripe account to send webhook events to the endpoint provided by this application.
 - **Installation**: Clone this repository and install dependencies by running `bundle install`.
 - **Configuration**: Set up your Stripe API keys in the `.env` file.
 - **Run the Application**: Start the Rails server using `rails server`.
+- **Stripe Webhook Setup**: Configure your Stripe account to send webhook events to the endpoint provided by this application.
+- **Forward Events to Webhook**: Download Stripe CLI and listen to events in [local test environment](https://dashboard.stripe.com/test/webhooks/create?endpoint_location=local).
 
 ## Future Enhancements
 - **Authentication**: Add authentication logic to secure the application and associate subscriptions with users.
